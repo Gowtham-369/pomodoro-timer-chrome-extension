@@ -13,63 +13,7 @@ let previousAudioVolume = 95;
 let currentAudioVolume = 95;
 let buttonState = "initialOrRestart";
 
-let persistentTabId = null;
-
-function createOrFocusPersistentTab(callback) {
-    if (persistentTabId === null) {
-        chrome.tabs.create({
-            url: chrome.runtime.getURL('persistent.html'),
-            active: false, // Keep the tab inactive
-            pinned: true   // Optionally pin the tab to prevent accidental closure
-        }, (tab) => {
-            persistentTabId = tab.id;
-            waitForTabLoad(persistentTabId, callback);
-        });
-    } else {
-        chrome.tabs.get(persistentTabId, (tab) => {
-            if (chrome.runtime.lastError || !tab) {
-                // If the tab no longer exists, create it again
-                chrome.tabs.create({
-                    url: chrome.runtime.getURL('persistent.html'),
-                    active: false,
-                    pinned: true
-                }, (newTab) => {
-                    persistentTabId = newTab.id;
-                    waitForTabLoad(persistentTabId, callback);
-                });
-            } else {
-                // If the tab exists, do nothing or activate it if needed
-                waitForTabLoad(persistentTabId, callback);
-            }
-        });
-    }
-}
-
-// Wait for the tab to be fully loaded before sending the message
-function waitForTabLoad(tabId, callback) {
-    chrome.tabs.onUpdated.addListener(function listener(tabIdUpdated, info) {
-        if (tabId === tabIdUpdated && info.status === 'complete') {
-            chrome.tabs.onUpdated.removeListener(listener);
-            if (callback) callback();
-        }
-    });
-}
-
-function sendMessageToPersistentTab(message) {
-    createOrFocusPersistentTab(() => {
-        if (persistentTabId !== null) {
-            chrome.tabs.sendMessage(persistentTabId, message, (response) => {
-                if (chrome.runtime.lastError) {
-                    // console.error('Error sending message to persistent tab:', chrome.runtime.lastError);
-                } else {
-                    // console.log('Message sent to persistent tab:', response);
-                }
-            });
-        }
-    });
-}
-
-
+// let persistentTabId = null;
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "start") {
@@ -264,7 +208,65 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     }
 });
 
+
+/*
+function createOrFocusPersistentTab(callback) {
+    if (persistentTabId === null) {
+        chrome.tabs.create({
+            url: chrome.runtime.getURL('persistent.html'),
+            active: false, // Keep the tab inactive
+            pinned: true   // Optionally pin the tab to prevent accidental closure
+        }, (tab) => {
+            persistentTabId = tab.id;
+            waitForTabLoad(persistentTabId, callback);
+        });
+    } else {
+        chrome.tabs.get(persistentTabId, (tab) => {
+            if (chrome.runtime.lastError || !tab) {
+                // If the tab no longer exists, create it again
+                chrome.tabs.create({
+                    url: chrome.runtime.getURL('persistent.html'),
+                    active: false,
+                    pinned: true
+                }, (newTab) => {
+                    persistentTabId = newTab.id;
+                    waitForTabLoad(persistentTabId, callback);
+                });
+            } else {
+                // If the tab exists, do nothing or activate it if needed
+                waitForTabLoad(persistentTabId, callback);
+            }
+        });
+    }
+}
+
+// Wait for the tab to be fully loaded before sending the message
+function waitForTabLoad(tabId, callback) {
+    chrome.tabs.onUpdated.addListener(function listener(tabIdUpdated, info) {
+        if (tabId === tabIdUpdated && info.status === 'complete') {
+            chrome.tabs.onUpdated.removeListener(listener);
+            if (callback) callback();
+        }
+    });
+}
+
+function sendMessageToPersistentTab(message) {
+    createOrFocusPersistentTab(() => {
+        if (persistentTabId !== null) {
+            chrome.tabs.sendMessage(persistentTabId, message, (response) => {
+                if (chrome.runtime.lastError) {
+                    // console.error('Error sending message to persistent tab:', chrome.runtime.lastError);
+                } else {
+                    // console.log('Message sent to persistent tab:', response);
+                }
+            });
+        }
+    });
+}
+*/
+
 // Function to inject a script into the active tab to play audio
+/*
 function playAudioInActiveTab() {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs.length > 0) {
@@ -279,8 +281,10 @@ function playAudioInActiveTab() {
         }
     });
 }
+*/
 
 // Listen for the alarm
+/*
 chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === 'pomodoroAlarm') {
         chrome.notifications.create('pomodoroAlarmNotification', {
@@ -299,7 +303,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         // sendMessageToPersistentTab({ action: 'playAudio' });
     }
 });
+*/
 
+/*
 chrome.runtime.onStartup.addListener(() => {
     chrome.alarms.clearAll();
 });
@@ -307,5 +313,6 @@ chrome.runtime.onStartup.addListener(() => {
 chrome.runtime.onSuspend.addListener(() => {
     chrome.alarms.clearAll();
 });
+*/
 
 
