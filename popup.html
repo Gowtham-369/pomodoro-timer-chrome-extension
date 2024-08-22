@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+
+    <script src="theme.js"></script>
+
+    <!-- Vendor CSS -->
+    <!-- <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css"> -->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Title Component -->
+    <div class="title-component">
+        <!-- Title -->
+        <div class="title-name">Pomodoro Timer</div>
+        <!-- Theme picker -->
+        <div id = "theme-switcher">
+            <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="5"/>
+                <g stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="4"/>
+                    <line x1="12" y1="20" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="4" y2="12"/>
+                    <line x1="20" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </g>
+            </svg>
+            <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="none">
+                <path d="M21.77 15.11A9 9 0 1112.89 2.23 7 7 0 1021.77 15.11z"/>
+            </svg>
+        </div>
+        
+    </div>
+    
+    <!-- Pomodoror Options Component-->
+    <div class="pomodoro-options">
+        <!-- Break and Focus Toggle Buttons -->
+        <button id="break-btn" class="toggle-btn">Break Time</button>
+        <button id="focus-btn" class="toggle-btn active">Focus Time</button>
+
+        <!-- Time Adjustment Buttons -->
+        <div id="time-adjust-buttons">
+            <button id="decrease-time" class="adjust-btn">-</button>
+            <input type="number" id="set-time" value="25" placeholder="minutes" min="0" max="1008000">
+            <button id="increase-time" class="adjust-btn">+</button>
+        </div>
+    </div>
+
+    <!-- Timer Display Component -->
+    <div class="timer-display">
+        <div id="progress-circle">
+            <svg id="progress-ring">
+                <circle id="progress-ring-background" r="112" cx="120" cy="120" />
+                <circle id="progress-ring-circle" r="112" cx="120" cy="120" />
+            </svg>
+        </div>
+        <div id="time-display">00:25:00</div>
+    </div>
+    
+    <!-- Start/Stop and Reset Buttion Options Component-->
+    <div class="control-buttons">
+        <button id="start-stop-btn" class="control-btn">Start</button>
+        <button id="reset-btn" class="control-btn">Reset</button>
+    </div>
+
+    <!-- Bottom Component for sound notification and ringtone options-->
+    <div class="bottom-component">
+        <div id="volume-area">
+            <button class="volume-mute-button" aria-keyshortcuts="m" aria-label="Mute keyboard shortcut m" title="Mute (m)">
+                <svg id="volume-icon" height="36" width="36" viewBox="0 0 36 36" >
+                    <path id="volume-on" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"></path>
+                    <path id="volume-off" style="display:none;" d="M 9.25,9 7.98,10.27 24.71,27 l 1.27,-1.27 Z"></path>
+                </svg>
+            </button>
+    
+            <div class="volume-panel" role="slider" aria-valuemin="0" aria-valuemax="100" tabindex="0" aria-valuenow="95" aria-valuetext="95% volume" aria-label="Volume" title="Volume">
+                <input type="range" class="volume-slider" min="0" max="100" value="95" style="touch-action: none;">
+            </div>
+    
+            <audio id="timer-end-sound">
+                <source src="./assets/audios/bell.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    
+
+        <div class="custom-dropdown" id="notification">
+            <div class="dropdown-header" >Notification (bell)</div>
+            <div class="dropdown-content" id="dropdownContent">
+                <div class="dropdown-item" data-value = 'bell' data-src = './assets/audios/bell.mp3'>bell</div>
+                <div class="dropdown-item" data-value = 'chime' data-src = './assets/audios/chime.mp3'>chime</div>
+                <div class="dropdown-item" data-value = 'radar' data-src = './assets/audios/radar.mp3'>radar</div>
+                <div class="dropdown-item" data-value = 'ripples' data-src = './assets/audios/ripples.mp3'>ripples</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor JS -->
+    <!-- <script src="./vendor/jquery/jquery-3.7.1.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- Custom JS -->
+    <script src="popup.js"></script>
+    
+</body>
+</html>
