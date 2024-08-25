@@ -8,8 +8,8 @@
 The **Pomodoro Timer Chrome Extension** is a productivity tool designed to help users manage their time more effectively using the Pomodoro Technique. This Chrome extension integrates seamlessly into the user's browser, providing a simple and intuitive interface to track work sessions and breaks directly from the browser toolbar.
 
 <div align="center">
-  <img src="./PomodoroExtensionScreenshots/Screenshot3.png" alt="Pomodoro Timer - Light Theme" width="45%" height="350px" />
-  <img src="./PomodoroExtensionScreenshots/Screenshot4.png" alt="Pomodoro Timer - Dark Theme" width="45%" height="350px" />
+  <img src="./PomodoroExtensionScreenshots/Screenshot3.png" alt="Pomodoro Timer - Light Theme" width="45%" height="400px" />
+  <img src="./PomodoroExtensionScreenshots/Screenshot4.png" alt="Pomodoro Timer - Dark Theme" width="45%" height="400px" />
 </div>
 
 ## Features
